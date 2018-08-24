@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboard / nopCommerce administration</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link href="lib/adminLTE/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css">
+    <link href="lib/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" type="text/css">
+    <link href="lib/typeahead/typeahead.css" rel="stylesheet" type="text/css">
+    <link href="lib/fontAwesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="lib/jquery-ui/jquery-ui-1.10.3/jquery-ui-themes/smoothness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet"
+        type="text/css">
+    <link href="lib/kendo/2014.1.318/kendo.common.min.css" rel="stylesheet" type="text/css">
+    <link href="lib/kendo/2014.1.318/kendo.default.min.css" rel="stylesheet" type="text/css">
+    <link href="lib/kendo/2014.1.318/kendo.rtl.min.css" rel="stylesheet" type="text/css">
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="lib/adminLTE/css/AdminLTE.min.css" rel="stylesheet" type="text/css">
+    <link href="css/admin/styles.css" rel="stylesheet" type="text/css">
+    <link href="lib/ionicons/css/ionicons-2.0.1.min.css" rel="stylesheet" type="text/css">
+
+    <script src="lib/jquery/jquery-1.10.2.min.js"></script>
+    <script src="lib/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/adminLTE/js/adminlte.min.js"></script>
+    <script src="lib/jquery-validate/jquery.validate-v1.11.1/jquery.validate.min.js"></script>
+    <script src="lib/jquery-validate/jquery.validate.unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="lib/jquery-ui/jquery-ui-1.10.3/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="lib/jquery-migrate/jquery-migrate-1.2.1.min.js"></script>
+    <script src="lib/typeahead/typeahead.bundle.min.js"></script>
+    <script src="js/admin.common.js"></script>
+    <script src="js/admin.navigation.js"></script>
+    <script src="js/admin.search.js"></script>
+    <script src="lib/kendo/2014.1.318/kendo.web.min.js"></script>
+</head>
+
+<body class="skin-blue sidebar-mini">
+    <div class="throbber">
+        <div class="curtain">
+        </div>
+        <div class="curtain-content">
+            <div>
+                <h1 class="throbber-header">Wait...</h1>
+                <p>
+                    <img src="css/admin/images/throbber-synchronizing.gif" alt="">
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="ajaxBusy">
+        <span>&nbsp;</span>
+    </div>
+    <div class="wrapper">
+        <div class="main-header">
+            <a href="/Admin" class="logo">
+
+                <span class="logo-mini"></span>
+
+                <span class="logo-lg"></span>
+            </a>
+            <div class="navbar navbar-static-top" role="navigation">
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">&nbsp;</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li>
+                        </li>
+                        <li class="account-info">
+                            John Smith
+                        </li>
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                        <li>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown">
+                                <i class="fa fa-gears"></i>
+                            </a>
+                            <ul class="maintenance-menu dropdown-menu bg-light-blue" role="menu">
+                                <li>
+                                    <form action="/Admin/Common/ClearCache" method="post" novalidate="novalidate">
+                                        <input name="returnurl" type="hidden" value="/admin/">
+                                        <button type="submit" class="bg-light-blue">
+                                            <span>Clear cache</span>
+                                        </button>
+                                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8A-T3JML5WpKv0yu-1qxef9SPUEJ6JLy42JZRRCYlLWo6Y1GR2HzRi506r1d-jEXOU8nT0MqB2X4RRh9AwP1tQrEmN6knEEtcXwL1cp_v3y64SYUIAaLsCgRbls7_iXf6aUxIAA69t8Snf5mWkYUBD2c9Bd8qjOd5Ds2veB_wa9-oeBi75ZIiFoB85DaKTsJBQ">
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-sidebar">
+            <div class="sidebar">
+                <div class="sidebar-form">
+                    <div id="search-box"></div>
+                </div>
+                <ul class="sidebar-menu tree" data-widget="tree">
+                    <li>
+                        <a href="/Admin" class="menu-item-link">
+                            <i class="fa fa-desktop"></i>
+                            <span class="menu-item-title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-book"></i>
+                            <span>Catalog</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="/Admin/Product/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Products</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Category/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Categories</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Manufacturer/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Manufacturers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/ProductReview/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Product reviews</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Product/ProductTags" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Product tags</span>
+                                </a>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span>Attributes</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li>
+                                        <a href="/Admin/ProductAttribute/List" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Product attributes</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/SpecificationAttribute/List" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Specification attributes</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/CheckoutAttribute/List" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Checkout attributes</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Sales</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="/Admin/Order/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Orders</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Order/ShipmentList" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Shipments</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/ReturnRequest/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Return requests</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/RecurringPayment/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Recurring payments</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/GiftCard/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Gift cards</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/ShoppingCart/CurrentCarts" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Shopping carts and wishlists</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i>
+                            <span>Customers</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="/Admin/Customer/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Customers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/CustomerRole/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Customer roles</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/OnlineCustomer/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Online customers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Vendor/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Vendors</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/ActivityLog/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Activity log</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Customer/GdprLog" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">GDPR requests (log)</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-tags"></i>
+                            <span>Promotions</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="/Admin/Discount/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Discounts</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Affiliate/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Affiliates</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/NewsLetterSubscription/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Newsletter subscribers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Campaign/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Campaigns</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cubes"></i>
+                            <span>Content management</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="/Admin/Topic/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Topics (pages)</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/MessageTemplate/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Message templates</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/News/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">News</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Blog/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Blog</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Poll/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Polls</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Forum/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Forums</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-gears"></i>
+                            <span>Configuration</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span>Settings</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li>
+                                        <a href="/Admin/Setting/GeneralCommon" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">General settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/CustomerUser" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Customer settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/Order" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Order settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/Shipping" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Shipping settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/Tax" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Tax settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/Catalog" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Catalog settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/ShoppingCart" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Shopping cart settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/RewardPoints" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Reward points</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/Gdpr" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">GDPR settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/Vendor" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Vendor settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/Blog" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Blog settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/News" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">News settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/Forum" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Forum settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/Media" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Media settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Setting/AllSettings" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">All settings (advanced)</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/Admin/EmailAccount/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Email accounts</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Store/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Stores</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Country/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Countries</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Language/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Languages</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Currency/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Currencies</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Payment/PaymentMethods" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Payment methods</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Tax/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Tax</span>
+                                </a>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span>Shipping</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li>
+                                        <a href="/Admin/Shipping/Providers" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Shipping providers</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Shipping/Warehouses" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Warehouses</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Shipping/PickupPointProviders" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Pickup points</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Shipping/DatesAndRanges" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Dates and ranges</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Measure/List" class="menu-item-link">
+                                            <i class="fa fa-genderless"></i>
+                                            <span class="menu-item-title">Measures</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/Admin/Security/Permissions" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Access control list</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Widget/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Widgets</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/ExternalAuthentication/Methods" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">External authentication</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Plugin/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Plugins</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cube"></i>
+                            <span>System</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="/Admin/Common/SystemInfo" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">System information</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Log/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Log</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Common/Warnings" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Warnings</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Common/Maintenance" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Maintenance</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/QueuedEmail/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Message queue</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/ScheduleTask/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Schedule tasks</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Common/SeNames" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Search engine friendly page names</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Template/List" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Templates</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-line-chart"></i>
+                            <span>Reports</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="/Admin/Report/LowStock" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Low stock</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Report/Bestsellers" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Bestsellers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Report/NeverSold" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Products never purchased</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Report/CountrySales" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Country sales</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Admin/Report/Customers" class="menu-item-link">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Customer reports</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-question-circle"></i>
+                            <span>Help</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="http://docs.nopcommerce.com/dashboard.action?utm_source=admin-panel&amp;utm_medium=menu&amp;utm_campaign=admin-panel"
+                                    class="menu-item-link" target="_blank">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Help topics</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.nopcommerce.com/boards/?utm_source=admin-panel&amp;utm_medium=menu&amp;utm_campaign=admin-panel" class="menu-item-link"
+                                    target="_blank">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Community forums</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.nopcommerce.com/p/541/nopcommerce-premium-support-services.aspx?utm_source=admin-panel&amp;utm_medium=menu&amp;utm_campaign=admin-panel"
+                                    class="menu-item-link" target="_blank">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                    <span class="menu-item-title">Premium support services</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="alert alert-warning alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                The store has some error(s) or warning(s). Please find more information on the Warnings page.
+            </div>
+            <div>
+                <div class="content-header">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-info collapsed-box" id="nopcommerce-news-box">
+                                        <div class="box-header with-border clearfix">
+                                            <div class="box-title">
+                                                <i class="fa fa-newspaper-o"></i>
+                                                NopCommerce News
+                                            </div>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body" style="display: none;">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading clearfix">
+                                                            <a class="pull-left" href="https://www.nopcommerce.com/?utm_campaign=admin-panel&amp;utm_medium=new-release&amp;utm_source=dashboard">nopCommerce v4.10 released</a>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            We are happy to announce the availability of nopCommerce v4.10 for download and upgrade. Visit
+                                                            <a href="https://www.nopcommerce.com/downloads.aspx?utm_campaign=admin-panel&amp;utm_medium=new-release&amp;utm_source=dashboard">www.nopCommerce.com</a> to download the latest version.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading clearfix">
+                                                            <a class="pull-left" href="http://days18.nopcommerce.com/?utm_campaign=admin-panel&amp;utm_medium=conference&amp;utm_source=dashboard">nopCommerce Days 2018</a>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            We are most pleased to announce our fourth annual conference! Las Vegas, USA. November 8-9. Visit
+                                                            <a href="http://days18.nopcommerce.com/?utm_campaign=admin-panel&amp;utm_medium=conference&amp;utm_source=dashboard">days18.nopcommerce.com</a> to find more.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="panel panel-info">
+                                                        <div class="panel-heading clearfix">
+                                                            <a class="pull-left" href="http://www.everleap.com/cloud-hosting/web-app/nopcommerce/hosting/?utm_source=NOPC&amp;utm_medium=TXT&amp;utm_content=PREMCP&amp;utm_campaign=MIG30DYS">Recommended hosting for your store</a>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            Everleap cloud hosting seamlessly scales sites with ease and they move stores for free.
+                                                            <a href="http://www.everleap.com/cloud-hosting/web-app/nopcommerce/hosting/?utm_source=NOPC&amp;utm_medium=TXT&amp;utm_content=PREMCP&amp;utm_campaign=MIG30DYS"
+                                                                target="_blank">Learn more</a> and get a 30 day free trial.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-info " id="nopcommerce-common-statistics-box">
+                                        <div class="box-header with-border clearfix">
+                                            <div class="box-title">
+                                                <i class="fa ion-stats-bars"></i>
+                                                Common statistics
+                                            </div>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="col-lg-3 col-xs-6">
+                                                <div class="small-box bg-aqua">
+                                                    <div class="inner">
+                                                        <h3>5</h3>
+                                                        <p>Orders</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="ion ion-bag"></i>
+                                                    </div>
+                                                    <a class="small-box-footer" href="/admin/Order/List">
+                                                        More info
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-xs-6">
+                                                <div class="small-box bg-yellow">
+                                                    <div class="inner">
+                                                        <h3>0</h3>
+                                                        <p>Pending return requests</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="ion ion-refresh"></i>
+                                                    </div>
+                                                    <a class="small-box-footer" href="/admin/ReturnRequest/List">
+                                                        More info
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-xs-6">
+                                                <div class="small-box bg-green">
+                                                    <div class="inner">
+                                                        <h3>6</h3>
+                                                        <p>Registered customers</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="ion ion-person-add"></i>
+                                                    </div>
+                                                    <a class="small-box-footer" href="/admin/Customer/List">
+                                                        More info
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-xs-6">
+                                                <div class="small-box bg-red">
+                                                    <div class="inner">
+                                                        <h3>3</h3>
+                                                        <p>Low stock products</p>
+                                                    </div>
+                                                    <div class="icon">
+                                                        <i class="ion ion-pie-graph"></i>
+                                                    </div>
+                                                    <a class="small-box-footer" href="/admin/Report/LowStock">
+                                                        More info
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="box box-info " id="order-average-report-box">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                <i class="fa fa-money"></i>
+                                                Order totals
+                                            </h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body" style="padding-bottom: 22px;">
+                                            <div id="average-order-report-grid" data-role="grid" class="k-grid k-widget">
+                                                <table role="grid">
+                                                    <colgroup>
+                                                        <col>
+                                                        <col>
+                                                        <col>
+                                                        <col>
+                                                        <col>
+                                                        <col>
+                                                    </colgroup>
+                                                    <thead class="k-grid-header" role="rowgroup">
+                                                        <tr role="row">
+                                                            <th role="columnheader" data-field="OrderStatus" data-title="Order Status" class="k-header">Order Status</th>
+                                                            <th role="columnheader" data-field="SumTodayOrders" data-title="Today" class="k-header">Today</th>
+                                                            <th role="columnheader" data-field="SumThisWeekOrders" data-title="This Week" class="k-header">This Week</th>
+                                                            <th role="columnheader" data-field="SumThisMonthOrders" data-title="This Month" class="k-header">This Month</th>
+                                                            <th role="columnheader" data-field="SumThisYearOrders" data-title="This Year" class="k-header">This Year</th>
+                                                            <th role="columnheader" data-field="SumAllTimeOrders" data-title="All time" class="k-header">All time</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody role="rowgroup">
+                                                        <tr data-uid="a280e1ef-3295-4d09-bbc4-d322a0aaf9e6" role="row">
+                                                            <td role="gridcell">Pending</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$8.80</td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="350a25dd-2e2b-4e4e-8a3f-ff54bc14c3a5" role="row">
+                                                            <td role="gridcell">Processing</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$4,417.00</td>
+                                                        </tr>
+                                                        <tr data-uid="0c578bb5-e0e3-4294-8beb-248d9ca57671" role="row">
+                                                            <td role="gridcell">Complete</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$33.50</td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="488ea7b5-a436-4a90-be4e-19b06bf5b599" role="row">
+                                                            <td role="gridcell">Cancelled</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                            <td role="gridcell">$0.00</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
+                                                    <a href="#" class="k-pager-refresh k-link" title="Refresh">
+                                                        <span class="k-icon k-i-refresh">Refresh</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    // $('#order-average-report-box').on('click', 'button[data-widget="collapse"]', function () {
+                                                    //     var collapsed = !$('#order-average-report-box').hasClass('collapsed-box');
+                                                    //     saveUserPreferences('/admin/Preferences/SavePreference', 'HideOrderAverageReportPanel', collapsed);
+                                                    // });
+                                                    var Statis_OrderAverageReportList = { "Data": [{ "OrderStatus": "Pending", "SumTodayOrders": "$0.00", "SumThisWeekOrders": "$0.00", "SumThisMonthOrders": "$0.00", "SumThisYearOrders": "$0.00", "SumAllTimeOrders": "$8.80", "Form": null, "CustomProperties": {} }, { "OrderStatus": "Processing", "SumTodayOrders": "$0.00", "SumThisWeekOrders": "$0.00", "SumThisMonthOrders": "$0.00", "SumThisYearOrders": "$0.00", "SumAllTimeOrders": "$4,417.00", "Form": null, "CustomProperties": {} }, { "OrderStatus": "Complete", "SumTodayOrders": "$0.00", "SumThisWeekOrders": "$0.00", "SumThisMonthOrders": "$0.00", "SumThisYearOrders": "$0.00", "SumAllTimeOrders": "$33.50", "Form": null, "CustomProperties": {} }, { "OrderStatus": "Cancelled", "SumTodayOrders": "$0.00", "SumThisWeekOrders": "$0.00", "SumThisMonthOrders": "$0.00", "SumThisYearOrders": "$0.00", "SumAllTimeOrders": "$0.00", "Form": null, "CustomProperties": {} }], "Total": 4, "ExtraData": null, "Errors": null, "Form": null, "CustomProperties": {} };
+                                                    $("#average-order-report-grid").kendoGrid({
+                                                        dataSource: Statis_OrderAverageReportList,
+                                                        pageable: {
+                                                            refresh: true,
+                                                            numeric: false,
+                                                            previousNext: false,
+                                                            info: false,
+                                                            messages: {
+                                                                display: "{0} - {1} of {2} items",
+                                                                empty: "No items to display",
+                                                                page: "Page",
+                                                                of: "of {0}",
+                                                                itemsPerPage: "items per page",
+                                                                first: "Go to the first page",
+                                                                previous: "Go to the previous page",
+                                                                next: "Go to the next page",
+                                                                last: "Go to the last page",
+                                                                refresh: "Refresh",
+                                                                allPages: "All",
+                                                                morePages: "More pages"
+                                                            }
+                                                        },
+                                                        editable: {
+                                                            confirmation: "Are you sure you want to delete this item?",
+                                                            mode: "inline"
+                                                        },
+                                                        scrollable: false,
+                                                        columns: [{
+                                                            field: "OrderStatus",
+                                                            title: "Order Status"
+                                                        }, {
+                                                            field: "SumTodayOrders",
+                                                            title: "Today"
+                                                        }, {
+                                                            field: "SumThisWeekOrders",
+                                                            title: "This Week"
+                                                        }, {
+                                                            field: "SumThisMonthOrders",
+                                                            title: "This Month"
+                                                        }, {
+                                                            field: "SumThisYearOrders",
+                                                            title: "This Year"
+                                                        }, {
+                                                            field: "SumAllTimeOrders",
+                                                            title: "All time"
+                                                        }]
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="box box-info " id="order-incomplete-report-box">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                <i class="fa fa-hourglass-start"></i>
+                                                Incomplete orders
+                                            </h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div id="incomplete-order-report-grid" data-role="grid" class="k-grid k-widget">
+                                                <table role="grid">
+                                                    <colgroup>
+                                                        <col>
+                                                        <col style="width:150px">
+                                                        <col style="width:100px">
+                                                    </colgroup>
+                                                    <thead class="k-grid-header" role="rowgroup">
+                                                        <tr role="row">
+                                                            <th role="columnheader" data-field="Item" data-title="Item" class="k-header">Item</th>
+                                                            <th role="columnheader" data-field="Total" data-title="Total" class="k-header">Total</th>
+                                                            <th role="columnheader" data-field="Count" data-title="Count" style="text-align:center" class="k-header">Count</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody role="rowgroup">
+                                                        <tr data-uid="623da9d5-fad5-40de-aa93-208538774ea6" role="row">
+                                                            <td role="gridcell">Total unpaid orders (pending payment status)</td>
+                                                            <td role="gridcell">$2,468.80</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/admin/Order/List?orderStatuses=10,20,30&amp;paymentStatuses=10">
+                                                                    <i class="fa fa-eye"></i>2 - view all</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="6922dce7-387e-4c52-82ec-5267e6aac585" role="row">
+                                                            <td role="gridcell">Total not yet shipped orders</td>
+                                                            <td role="gridcell">$1,855.00</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/admin/Order/List?orderStatuses=10,20,30&amp;shippingStatuses=20">
+                                                                    <i class="fa fa-eye"></i>1 - view all</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-uid="e11ca8ff-d8da-492b-b455-f83474c900b8" role="row">
+                                                            <td role="gridcell">Total incomplete orders (pending order status)</td>
+                                                            <td role="gridcell">$8.80</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/admin/Order/List?orderStatuses=10">
+                                                                    <i class="fa fa-eye"></i>1 - view all</a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
+                                                    <a href="#" class="k-pager-refresh k-link" title="Refresh">
+                                                        <span class="k-icon k-i-refresh">Refresh</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    // $('#order-incomplete-report-box').on('click', 'button[data-widget="collapse"]', function () {
+                                                    //     var collapsed = !$('#order-incomplete-report-box').hasClass('collapsed-box');
+                                                    //     saveUserPreferences('/admin/Preferences/SavePreference', 'HideOrderIncompleteReportPanel', collapsed);
+                                                    // });
+                                                    var StaticOrderIncompleteReportList = { "Data": [{ "Item": "Total unpaid orders (pending payment status)", "Total": "$2,468.80", "Count": 2, "ViewLink": "/admin/Order/List?orderStatuses=10,20,30&paymentStatuses=10", "Form": null, "CustomProperties": {} }, { "Item": "Total not yet shipped orders", "Total": "$1,855.00", "Count": 1, "ViewLink": "/admin/Order/List?orderStatuses=10,20,30&shippingStatuses=20", "Form": null, "CustomProperties": {} }, { "Item": "Total incomplete orders (pending order status)", "Total": "$8.80", "Count": 1, "ViewLink": "/admin/Order/List?orderStatuses=10", "Form": null, "CustomProperties": {} }], "Total": 3, "ExtraData": null, "Errors": null, "Form": null, "CustomProperties": {} };
+                                                    $("#incomplete-order-report-grid").kendoGrid({
+                                                        dataSource: StaticOrderIncompleteReportList,
+                                                        pageable: {
+                                                            refresh: true,
+                                                            numeric: false,
+                                                            previousNext: false,
+                                                            info: false,
+                                                            messages: {
+                                                                display: "{0} - {1} of {2} items",
+                                                                empty: "No items to display",
+                                                                page: "Page",
+                                                                of: "of {0}",
+                                                                itemsPerPage: "items per page",
+                                                                first: "Go to the first page",
+                                                                previous: "Go to the previous page",
+                                                                next: "Go to the next page",
+                                                                last: "Go to the last page",
+                                                                refresh: "Refresh",
+                                                                allPages: "All",
+                                                                morePages: "More pages"
+                                                            }
+                                                        },
+                                                        editable: {
+                                                            confirmation: "Are you sure you want to delete this item?",
+                                                            mode: "inline"
+                                                        },
+                                                        scrollable: false,
+                                                        columns: [{
+                                                            field: "Item",
+                                                            title: "Item"
+                                                        }, {
+                                                            field: "Total",
+                                                            title: "Total",
+                                                            width: 150
+                                                        }, {
+                                                            field: "Count",
+                                                            title: "Count",
+                                                            width: 100,
+                                                            headerAttributes: { style: "text-align:center" },
+                                                            attributes: { style: "text-align:center" },
+                                                            template: '<a class="btn btn-xs btn-default" href="#=ViewLink#"><i class="fa fa-eye"></i>#=Count# - view all</a>'
+                                                        }]
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="box box-info " id="latest-orders-box">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                <i class="fa fa-cart-plus"></i>
+                                                Latest Orders
+                                                <a class="btn btn-xs btn-info btn-flat margin-l-10" href="/admin/Order/List">View All Orders</a>
+                                            </h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div id="orders-grid" data-role="grid" class="k-grid k-widget">
+                                                <table role="grid">
+                                                    <colgroup>
+                                                        <col style="width:80px">
+                                                        <col style="width:100px">
+                                                        <col style="width:250px">
+                                                        <col style="width:100px">
+                                                        <col style="width:150px">
+                                                        <col style="width:30px">
+                                                    </colgroup>
+                                                    <thead class="k-grid-header" role="rowgroup">
+                                                        <tr role="row">
+                                                            <th role="columnheader" data-field="CustomOrderNumber" data-title="Order #"
+                                                                class="k-header">Order #</th>
+                                                            <th role="columnheader" data-field="OrderStatus"
+                                                                data-title="Order status" class="k-header">Order status</th>
+                                                            <th role="columnheader" data-field="CustomerEmail"
+                                                                data-title="Customer" class="k-header">Customer</th>
+                                                            <th role="columnheader" data-field="StoreName" data-title="Store"
+                                                                class="k-header">Store</th>
+                                                            <th role="columnheader" data-field="CreatedOn" data-title="Created on"
+                                                                class="k-header">Created on</th>
+                                                            <th role="columnheader" data-field="Id" data-title="View"
+                                                                style="text-align:center" class="k-header">View</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody role="rowgroup">
+                                                        <tr data-uid="b94dbd4c-5395-464a-b9d8-2ee8f8ee0205" role="row">
+                                                            <td role="gridcell">5</td>
+                                                            <td role="gridcell">
+                                                                <span class="grid-report-item  green ">Complete</span>
+                                                            </td>
+                                                            <td role="gridcell">Victoria Terces (victoria_victoria@nopCommerce.com)</td>
+                                                            <td role="gridcell">Your store name</td>
+                                                            <td role="gridcell">3/13/2017 6:20:10 AM</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Order/Edit/5">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="278304b0-f74b-4045-ab16-02e3f0a5e956"
+                                                            role="row">
+                                                            <td role="gridcell">4</td>
+                                                            <td role="gridcell">
+                                                                <span class="grid-report-item  blue ">Processing</span>
+                                                            </td>
+                                                            <td role="gridcell">Brenda Lindgren (brenda_lindgren@nopCommerce.com)</td>
+                                                            <td role="gridcell">Your store name</td>
+                                                            <td role="gridcell">3/13/2017 6:20:09 AM</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Order/Edit/4">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-uid="6874f7c2-0f63-477f-bd69-493da123537f" role="row">
+                                                            <td role="gridcell">3</td>
+                                                            <td role="gridcell">
+                                                                <span class="grid-report-item  yellow ">Pending</span>
+                                                            </td>
+                                                            <td role="gridcell">James Pan (james_pan@nopCommerce.com)</td>
+                                                            <td role="gridcell">Your store name</td>
+                                                            <td role="gridcell">3/13/2017 6:20:09 AM</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Order/Edit/3">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="7d52d1f4-77b7-471a-9f4f-75bbb898cd95"
+                                                            role="row">
+                                                            <td role="gridcell">2</td>
+                                                            <td role="gridcell">
+                                                                <span class="grid-report-item  blue ">Processing</span>
+                                                            </td>
+                                                            <td role="gridcell">Arthur Holmes (arthur_holmes@nopCommerce.com)</td>
+                                                            <td role="gridcell">Your store name</td>
+                                                            <td role="gridcell">3/13/2017 6:20:09 AM</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Order/Edit/2">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-uid="26b3553f-e31f-4fc3-aa37-9093f9384c0f" role="row">
+                                                            <td role="gridcell">1</td>
+                                                            <td role="gridcell">
+                                                                <span class="grid-report-item  blue ">Processing</span>
+                                                            </td>
+                                                            <td role="gridcell">Steve Gates (steve_gates@nopCommerce.com)</td>
+                                                            <td role="gridcell">Your store name</td>
+                                                            <td role="gridcell">3/13/2017 6:20:09 AM</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Order/Edit/1">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
+                                                    <a href="#" title="Go to the first page" class="k-link k-pager-nav k-pager-first k-state-disabled"
+                                                        data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-seek-w">Go to the first page</span>
+                                                    </a>
+                                                    <a href="#" title="Go to the previous page" class="k-link k-pager-nav  k-state-disabled"
+                                                        data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-arrow-w">Go to the previous page</span>
+                                                    </a>
+                                                    <ul class="k-pager-numbers k-reset">
+                                                        <li>
+                                                            <span class="k-state-selected">1</span>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="#" title="Go to the next page" class="k-link k-pager-nav  k-state-disabled"
+                                                        data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-arrow-e">Go to the next page</span>
+                                                    </a>
+                                                    <a href="#" title="Go to the last page" class="k-link k-pager-nav k-pager-last k-state-disabled"
+                                                        data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-seek-e">Go to the last page</span>
+                                                    </a>
+                                                    <a href="#" class="k-pager-refresh k-link" title="Refresh">
+                                                        <span class="k-icon k-i-refresh">Refresh</span>
+                                                    </a>
+                                                    <span class="k-pager-info k-label">1 - 5 of 5 items</span>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    // $('#latest-orders-box').on('click', 'button[data-widget="collapse"]', function () {
+                                                    //     var collapsed = !$('#latest-orders-box').hasClass('collapsed-box');
+                                                    //     saveUserPreferences('/admin/Preferences/SavePreference', 'HideLatestOrdersPanel', collapsed);
+                                                    // });
+                                                    var StaticOrderList = {"Data":[{"IsLoggedInAsVendor":false,"Id":5,"OrderGuid":"00000000-0000-0000-0000-000000000000","CustomOrderNumber":"5","StoreName":"Your store name","CustomerId":0,"CustomerInfo":null,"CustomerEmail":"victoria_victoria@nopCommerce.com","CustomerFullName":"Victoria Terces","CustomerIp":null,"CustomValues":{},"AffiliateId":0,"AffiliateName":null,"UsedDiscounts":[],"AllowCustomersToSelectTaxDisplayType":false,"TaxDisplayType":0,"OrderSubtotalInclTax":null,"OrderSubtotalExclTax":null,"OrderSubTotalDiscountInclTax":null,"OrderSubTotalDiscountExclTax":null,"OrderShippingInclTax":null,"OrderShippingExclTax":null,"PaymentMethodAdditionalFeeInclTax":null,"PaymentMethodAdditionalFeeExclTax":null,"Tax":null,"TaxRates":[],"DisplayTax":false,"DisplayTaxRates":false,"OrderTotalDiscount":null,"RedeemedRewardPoints":0,"RedeemedRewardPointsAmount":null,"OrderTotal":"$33.50","RefundedAmount":null,"Profit":null,"OrderSubtotalInclTaxValue":0.0,"OrderSubtotalExclTaxValue":0.0,"OrderSubTotalDiscountInclTaxValue":0.0,"OrderSubTotalDiscountExclTaxValue":0.0,"OrderShippingInclTaxValue":0.0,"OrderShippingExclTaxValue":0.0,"PaymentMethodAdditionalFeeInclTaxValue":0.0,"PaymentMethodAdditionalFeeExclTaxValue":0.0,"TaxValue":0.0,"TaxRatesValue":null,"OrderTotalDiscountValue":0.0,"OrderTotalValue":0.0,"RecurringPaymentId":0,"OrderStatus":"Complete","OrderStatusId":30,"PaymentStatus":"Paid","PaymentStatusId":30,"PaymentMethod":null,"AllowStoringCreditCardNumber":false,"CardType":null,"CardName":null,"CardNumber":null,"CardCvv2":null,"CardExpirationMonth":null,"CardExpirationYear":null,"AuthorizationTransactionId":null,"CaptureTransactionId":null,"SubscriptionTransactionId":null,"IsShippable":false,"PickUpInStore":false,"PickupAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"PickupAddressGoogleMapsUrl":null,"ShippingStatus":"Delivered","ShippingStatusId":40,"ShippingAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"ShippingMethod":null,"ShippingAddressGoogleMapsUrl":null,"CanAddNewShipments":false,"BillingAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"VatNumber":null,"GiftCards":[],"HasDownloadableProducts":false,"Items":[],"CreatedOn":"2017-03-13T06:20:10.387","CheckoutAttributeInfo":null,"AddOrderNoteDisplayToCustomer":false,"AddOrderNoteMessage":null,"AddOrderNoteHasDownload":false,"AddOrderNoteDownloadId":0,"AmountToRefund":0.0,"MaxAmountToRefund":0.0,"PrimaryStoreCurrencyCode":null,"CanCancelOrder":false,"CanCapture":false,"CanMarkOrderAsPaid":false,"CanRefund":false,"CanRefundOffline":false,"CanPartiallyRefund":false,"CanPartiallyRefundOffline":false,"CanVoid":false,"CanVoidOffline":false,"OrderShipmentSearchModel":{"OrderId":0,"ShipmentItemSearchModel":{"ShipmentId":0,"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"OrderNoteSearchModel":{"OrderId":0,"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"Form":null,"CustomProperties":{}},{"IsLoggedInAsVendor":false,"Id":4,"OrderGuid":"00000000-0000-0000-0000-000000000000","CustomOrderNumber":"4","StoreName":"Your store name","CustomerId":0,"CustomerInfo":null,"CustomerEmail":"brenda_lindgren@nopCommerce.com","CustomerFullName":"Brenda Lindgren","CustomerIp":null,"CustomValues":{},"AffiliateId":0,"AffiliateName":null,"UsedDiscounts":[],"AllowCustomersToSelectTaxDisplayType":false,"TaxDisplayType":0,"OrderSubtotalInclTax":null,"OrderSubtotalExclTax":null,"OrderSubTotalDiscountInclTax":null,"OrderSubTotalDiscountExclTax":null,"OrderShippingInclTax":null,"OrderShippingExclTax":null,"PaymentMethodAdditionalFeeInclTax":null,"PaymentMethodAdditionalFeeExclTax":null,"Tax":null,"TaxRates":[],"DisplayTax":false,"DisplayTaxRates":false,"OrderTotalDiscount":null,"RedeemedRewardPoints":0,"RedeemedRewardPointsAmount":null,"OrderTotal":"$102.00","RefundedAmount":null,"Profit":null,"OrderSubtotalInclTaxValue":0.0,"OrderSubtotalExclTaxValue":0.0,"OrderSubTotalDiscountInclTaxValue":0.0,"OrderSubTotalDiscountExclTaxValue":0.0,"OrderShippingInclTaxValue":0.0,"OrderShippingExclTaxValue":0.0,"PaymentMethodAdditionalFeeInclTaxValue":0.0,"PaymentMethodAdditionalFeeExclTaxValue":0.0,"TaxValue":0.0,"TaxRatesValue":null,"OrderTotalDiscountValue":0.0,"OrderTotalValue":0.0,"RecurringPaymentId":0,"OrderStatus":"Processing","OrderStatusId":20,"PaymentStatus":"Paid","PaymentStatusId":30,"PaymentMethod":null,"AllowStoringCreditCardNumber":false,"CardType":null,"CardName":null,"CardNumber":null,"CardCvv2":null,"CardExpirationMonth":null,"CardExpirationYear":null,"AuthorizationTransactionId":null,"CaptureTransactionId":null,"SubscriptionTransactionId":null,"IsShippable":false,"PickUpInStore":false,"PickupAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"PickupAddressGoogleMapsUrl":null,"ShippingStatus":"Shipped","ShippingStatusId":30,"ShippingAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"ShippingMethod":null,"ShippingAddressGoogleMapsUrl":null,"CanAddNewShipments":false,"BillingAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"VatNumber":null,"GiftCards":[],"HasDownloadableProducts":false,"Items":[],"CreatedOn":"2017-03-13T06:20:09.87","CheckoutAttributeInfo":null,"AddOrderNoteDisplayToCustomer":false,"AddOrderNoteMessage":null,"AddOrderNoteHasDownload":false,"AddOrderNoteDownloadId":0,"AmountToRefund":0.0,"MaxAmountToRefund":0.0,"PrimaryStoreCurrencyCode":null,"CanCancelOrder":false,"CanCapture":false,"CanMarkOrderAsPaid":false,"CanRefund":false,"CanRefundOffline":false,"CanPartiallyRefund":false,"CanPartiallyRefundOffline":false,"CanVoid":false,"CanVoidOffline":false,"OrderShipmentSearchModel":{"OrderId":0,"ShipmentItemSearchModel":{"ShipmentId":0,"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"OrderNoteSearchModel":{"OrderId":0,"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"Form":null,"CustomProperties":{}},{"IsLoggedInAsVendor":false,"Id":3,"OrderGuid":"00000000-0000-0000-0000-000000000000","CustomOrderNumber":"3","StoreName":"Your store name","CustomerId":0,"CustomerInfo":null,"CustomerEmail":"james_pan@nopCommerce.com","CustomerFullName":"James Pan","CustomerIp":null,"CustomValues":{},"AffiliateId":0,"AffiliateName":null,"UsedDiscounts":[],"AllowCustomersToSelectTaxDisplayType":false,"TaxDisplayType":0,"OrderSubtotalInclTax":null,"OrderSubtotalExclTax":null,"OrderSubTotalDiscountInclTax":null,"OrderSubTotalDiscountExclTax":null,"OrderShippingInclTax":null,"OrderShippingExclTax":null,"PaymentMethodAdditionalFeeInclTax":null,"PaymentMethodAdditionalFeeExclTax":null,"Tax":null,"TaxRates":[],"DisplayTax":false,"DisplayTaxRates":false,"OrderTotalDiscount":null,"RedeemedRewardPoints":0,"RedeemedRewardPointsAmount":null,"OrderTotal":"$8.80","RefundedAmount":null,"Profit":null,"OrderSubtotalInclTaxValue":0.0,"OrderSubtotalExclTaxValue":0.0,"OrderSubTotalDiscountInclTaxValue":0.0,"OrderSubTotalDiscountExclTaxValue":0.0,"OrderShippingInclTaxValue":0.0,"OrderShippingExclTaxValue":0.0,"PaymentMethodAdditionalFeeInclTaxValue":0.0,"PaymentMethodAdditionalFeeExclTaxValue":0.0,"TaxValue":0.0,"TaxRatesValue":null,"OrderTotalDiscountValue":0.0,"OrderTotalValue":0.0,"RecurringPaymentId":0,"OrderStatus":"Pending","OrderStatusId":10,"PaymentStatus":"Pending","PaymentStatusId":10,"PaymentMethod":null,"AllowStoringCreditCardNumber":false,"CardType":null,"CardName":null,"CardNumber":null,"CardCvv2":null,"CardExpirationMonth":null,"CardExpirationYear":null,"AuthorizationTransactionId":null,"CaptureTransactionId":null,"SubscriptionTransactionId":null,"IsShippable":false,"PickUpInStore":false,"PickupAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"PickupAddressGoogleMapsUrl":null,"ShippingStatus":"Shipping not required","ShippingStatusId":10,"ShippingAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"ShippingMethod":null,"ShippingAddressGoogleMapsUrl":null,"CanAddNewShipments":false,"BillingAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"VatNumber":null,"GiftCards":[],"HasDownloadableProducts":false,"Items":[],"CreatedOn":"2017-03-13T06:20:09.647","CheckoutAttributeInfo":null,"AddOrderNoteDisplayToCustomer":false,"AddOrderNoteMessage":null,"AddOrderNoteHasDownload":false,"AddOrderNoteDownloadId":0,"AmountToRefund":0.0,"MaxAmountToRefund":0.0,"PrimaryStoreCurrencyCode":null,"CanCancelOrder":false,"CanCapture":false,"CanMarkOrderAsPaid":false,"CanRefund":false,"CanRefundOffline":false,"CanPartiallyRefund":false,"CanPartiallyRefundOffline":false,"CanVoid":false,"CanVoidOffline":false,"OrderShipmentSearchModel":{"OrderId":0,"ShipmentItemSearchModel":{"ShipmentId":0,"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"OrderNoteSearchModel":{"OrderId":0,"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"Form":null,"CustomProperties":{}},{"IsLoggedInAsVendor":false,"Id":2,"OrderGuid":"00000000-0000-0000-0000-000000000000","CustomOrderNumber":"2","StoreName":"Your store name","CustomerId":0,"CustomerInfo":null,"CustomerEmail":"arthur_holmes@nopCommerce.com","CustomerFullName":"Arthur Holmes","CustomerIp":null,"CustomValues":{},"AffiliateId":0,"AffiliateName":null,"UsedDiscounts":[],"AllowCustomersToSelectTaxDisplayType":false,"TaxDisplayType":0,"OrderSubtotalInclTax":null,"OrderSubtotalExclTax":null,"OrderSubTotalDiscountInclTax":null,"OrderSubTotalDiscountExclTax":null,"OrderShippingInclTax":null,"OrderShippingExclTax":null,"PaymentMethodAdditionalFeeInclTax":null,"PaymentMethodAdditionalFeeExclTax":null,"Tax":null,"TaxRates":[],"DisplayTax":false,"DisplayTaxRates":false,"OrderTotalDiscount":null,"RedeemedRewardPoints":0,"RedeemedRewardPointsAmount":null,"OrderTotal":"$2,460.00","RefundedAmount":null,"Profit":null,"OrderSubtotalInclTaxValue":0.0,"OrderSubtotalExclTaxValue":0.0,"OrderSubTotalDiscountInclTaxValue":0.0,"OrderSubTotalDiscountExclTaxValue":0.0,"OrderShippingInclTaxValue":0.0,"OrderShippingExclTaxValue":0.0,"PaymentMethodAdditionalFeeInclTaxValue":0.0,"PaymentMethodAdditionalFeeExclTaxValue":0.0,"TaxValue":0.0,"TaxRatesValue":null,"OrderTotalDiscountValue":0.0,"OrderTotalValue":0.0,"RecurringPaymentId":0,"OrderStatus":"Processing","OrderStatusId":20,"PaymentStatus":"Pending","PaymentStatusId":10,"PaymentMethod":null,"AllowStoringCreditCardNumber":false,"CardType":null,"CardName":null,"CardNumber":null,"CardCvv2":null,"CardExpirationMonth":null,"CardExpirationYear":null,"AuthorizationTransactionId":null,"CaptureTransactionId":null,"SubscriptionTransactionId":null,"IsShippable":false,"PickUpInStore":false,"PickupAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"PickupAddressGoogleMapsUrl":null,"ShippingStatus":"Delivered","ShippingStatusId":40,"ShippingAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"ShippingMethod":null,"ShippingAddressGoogleMapsUrl":null,"CanAddNewShipments":false,"BillingAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"VatNumber":null,"GiftCards":[],"HasDownloadableProducts":false,"Items":[],"CreatedOn":"2017-03-13T06:20:09.46","CheckoutAttributeInfo":null,"AddOrderNoteDisplayToCustomer":false,"AddOrderNoteMessage":null,"AddOrderNoteHasDownload":false,"AddOrderNoteDownloadId":0,"AmountToRefund":0.0,"MaxAmountToRefund":0.0,"PrimaryStoreCurrencyCode":null,"CanCancelOrder":false,"CanCapture":false,"CanMarkOrderAsPaid":false,"CanRefund":false,"CanRefundOffline":false,"CanPartiallyRefund":false,"CanPartiallyRefundOffline":false,"CanVoid":false,"CanVoidOffline":false,"OrderShipmentSearchModel":{"OrderId":0,"ShipmentItemSearchModel":{"ShipmentId":0,"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"OrderNoteSearchModel":{"OrderId":0,"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"Form":null,"CustomProperties":{}},{"IsLoggedInAsVendor":false,"Id":1,"OrderGuid":"00000000-0000-0000-0000-000000000000","CustomOrderNumber":"1","StoreName":"Your store name","CustomerId":0,"CustomerInfo":null,"CustomerEmail":"steve_gates@nopCommerce.com","CustomerFullName":"Steve Gates","CustomerIp":null,"CustomValues":{},"AffiliateId":0,"AffiliateName":null,"UsedDiscounts":[],"AllowCustomersToSelectTaxDisplayType":false,"TaxDisplayType":0,"OrderSubtotalInclTax":null,"OrderSubtotalExclTax":null,"OrderSubTotalDiscountInclTax":null,"OrderSubTotalDiscountExclTax":null,"OrderShippingInclTax":null,"OrderShippingExclTax":null,"PaymentMethodAdditionalFeeInclTax":null,"PaymentMethodAdditionalFeeExclTax":null,"Tax":null,"TaxRates":[],"DisplayTax":false,"DisplayTaxRates":false,"OrderTotalDiscount":null,"RedeemedRewardPoints":0,"RedeemedRewardPointsAmount":null,"OrderTotal":"$1,855.00","RefundedAmount":null,"Profit":null,"OrderSubtotalInclTaxValue":0.0,"OrderSubtotalExclTaxValue":0.0,"OrderSubTotalDiscountInclTaxValue":0.0,"OrderSubTotalDiscountExclTaxValue":0.0,"OrderShippingInclTaxValue":0.0,"OrderShippingExclTaxValue":0.0,"PaymentMethodAdditionalFeeInclTaxValue":0.0,"PaymentMethodAdditionalFeeExclTaxValue":0.0,"TaxValue":0.0,"TaxRatesValue":null,"OrderTotalDiscountValue":0.0,"OrderTotalValue":0.0,"RecurringPaymentId":0,"OrderStatus":"Processing","OrderStatusId":20,"PaymentStatus":"Paid","PaymentStatusId":30,"PaymentMethod":null,"AllowStoringCreditCardNumber":false,"CardType":null,"CardName":null,"CardNumber":null,"CardCvv2":null,"CardExpirationMonth":null,"CardExpirationYear":null,"AuthorizationTransactionId":null,"CaptureTransactionId":null,"SubscriptionTransactionId":null,"IsShippable":false,"PickUpInStore":false,"PickupAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"PickupAddressGoogleMapsUrl":null,"ShippingStatus":"Not yet shipped","ShippingStatusId":20,"ShippingAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"ShippingMethod":null,"ShippingAddressGoogleMapsUrl":null,"CanAddNewShipments":false,"BillingAddress":{"FirstName":null,"LastName":null,"Email":null,"Company":null,"CountryId":null,"CountryName":null,"StateProvinceId":null,"StateProvinceName":null,"Address1":null,"City":null,"County":null,"Address2":null,"ZipPostalCode":null,"PhoneNumber":null,"FaxNumber":null,"AddressHtml":null,"FormattedCustomAddressAttributes":null,"CustomAddressAttributes":[],"AvailableCountries":[],"AvailableStates":[],"FirstNameEnabled":false,"FirstNameRequired":false,"LastNameEnabled":false,"LastNameRequired":false,"EmailEnabled":false,"EmailRequired":false,"CompanyEnabled":false,"CompanyRequired":false,"CountryEnabled":false,"CountryRequired":false,"StateProvinceEnabled":false,"CityEnabled":false,"CityRequired":false,"CountyEnabled":false,"CountyRequired":false,"StreetAddressEnabled":false,"StreetAddressRequired":false,"StreetAddress2Enabled":false,"StreetAddress2Required":false,"ZipPostalCodeEnabled":false,"ZipPostalCodeRequired":false,"PhoneEnabled":false,"PhoneRequired":false,"FaxEnabled":false,"FaxRequired":false,"Id":0,"Form":null,"CustomProperties":{}},"VatNumber":null,"GiftCards":[],"HasDownloadableProducts":false,"Items":[],"CreatedOn":"2017-03-13T06:20:09.077","CheckoutAttributeInfo":null,"AddOrderNoteDisplayToCustomer":false,"AddOrderNoteMessage":null,"AddOrderNoteHasDownload":false,"AddOrderNoteDownloadId":0,"AmountToRefund":0.0,"MaxAmountToRefund":0.0,"PrimaryStoreCurrencyCode":null,"CanCancelOrder":false,"CanCapture":false,"CanMarkOrderAsPaid":false,"CanRefund":false,"CanRefundOffline":false,"CanPartiallyRefund":false,"CanPartiallyRefundOffline":false,"CanVoid":false,"CanVoidOffline":false,"OrderShipmentSearchModel":{"OrderId":0,"ShipmentItemSearchModel":{"ShipmentId":0,"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"OrderNoteSearchModel":{"OrderId":0,"Page":1,"PageSize":10,"AvailablePageSizes":null,"Form":null,"CustomProperties":{}},"Form":null,"CustomProperties":{}}],"Total":5,"ExtraData":null,"Errors":null,"Form":null,"CustomProperties":{}};
+                                                    $("#orders-grid").kendoGrid({
+                                                        dataSource: {
+                                                            type: "json",
+                                                            transport: StaticOrderList,
+                                                            schema: {
+                                                                data: "Data",
+                                                                total: "Total",
+                                                                errors: "Errors"
+                                                            },
+                                                            error: function (e) {
+                                                                display_kendoui_grid_error(e);
+                                                                // Cancel the changes
+                                                                this.cancelChanges();
+                                                            },
+                                                            pageSize: 5,
+                                                            serverPaging: true,
+                                                            serverFiltering: true,
+                                                            serverSorting: true
+                                                        },
+                                                        pageable: {
+                                                            refresh: true,
+                                                            messages: {
+                                                                display: "{0} - {1} of {2} items",
+                                                                empty: "No items to display",
+                                                                page: "Page",
+                                                                of: "of {0}",
+                                                                itemsPerPage: "items per page",
+                                                                first: "Go to the first page",
+                                                                previous: "Go to the previous page",
+                                                                next: "Go to the next page",
+                                                                last: "Go to the last page",
+                                                                refresh: "Refresh",
+                                                                allPages: "All",
+                                                                morePages: "More pages"
+                                                            }
+                                                        },
+                                                        scrollable: false,
+                                                        columns: [
+                                                            {
+                                                                field: "CustomOrderNumber",
+                                                                title: "Order #",
+                                                                width: 80
+                                                            },
+                                                            {
+                                                                field: "OrderStatus",
+                                                                title: "Order status",
+                                                                width: 100,
+                                                                template: '<span class="grid-report-item ' +
+                                                                    '# if(OrderStatusId == 10) {# yellow #} #' +
+                                                                    '# if(OrderStatusId == 20) {# blue #} #' +
+                                                                    '# if(OrderStatusId == 30) {# green #} #' +
+                                                                    '# if(OrderStatusId == 40) {# red #} #' +
+                                                                    '">#=OrderStatus#</span>'
+                                                            },
+                                                            {
+                                                                field: "CustomerEmail",
+                                                                title: "Customer",
+                                                                width: 250,
+                                                                template: '#=CustomerFullName# (#=CustomerEmail#)'
+                                                            },
+                                                            {
+                                                                field: "StoreName",
+                                                                hidden: false,
+                                                                title: "Store",
+                                                                width: 100
+                                                            }, {
+                                                                field: "CreatedOn",
+                                                                title: "Created on",
+                                                                width: 150,
+                                                                type: "date",
+                                                                format: "{0:G}"
+                                                            },
+                                                            {
+                                                                field: "Id",
+                                                                title: "View",
+                                                                width: 30,
+                                                                headerAttributes: { style: "text-align:center" },
+                                                                attributes: { style: "text-align:center" },
+                                                                template: '<a class="btn btn-xs btn-default" href="/Admin/Order/Edit/#=Id#"><i class="fa fa-eye"></i>View</a>'
+                                                            }
+                                                        ]
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="box box-info " id="popular-search-terms-box">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                <i class="fa fa-search"></i>
+                                                Popular search keywords
+                                            </h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div id="search-term-report-grid" data-role="grid" class="k-grid k-widget">
+                                                <table role="grid">
+                                                    <colgroup>
+                                                        <col>
+                                                        <col>
+                                                    </colgroup>
+                                                    <thead class="k-grid-header" role="rowgroup">
+                                                        <tr role="row">
+                                                            <th role="columnheader" data-field="Keyword" data-title="Keyword"
+                                                                class="k-header">Keyword</th>
+                                                            <th role="columnheader" data-field="Count" data-title="Count"
+                                                                class="k-header">Count</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody role="rowgroup">
+                                                        <tr data-uid="2dea3ab2-6e64-44d0-a6ef-24d163c48c44" role="row">
+                                                            <td role="gridcell">computer</td>
+                                                            <td role="gridcell">34</td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="5044934c-9cba-4848-a7be-ffcb5faaa765"
+                                                            role="row">
+                                                            <td role="gridcell">camera</td>
+                                                            <td role="gridcell">30</td>
+                                                        </tr>
+                                                        <tr data-uid="1726ad2d-ac7e-45fc-8ba2-1a9d92148198" role="row">
+                                                            <td role="gridcell">jewelry</td>
+                                                            <td role="gridcell">27</td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="dd8a907a-9aea-4c6d-a075-90e4c9db4e7f"
+                                                            role="row">
+                                                            <td role="gridcell">shoes</td>
+                                                            <td role="gridcell">26</td>
+                                                        </tr>
+                                                        <tr data-uid="94d0d220-6c08-46af-9be9-700fb08b3d3c" role="row">
+                                                            <td role="gridcell">jeans</td>
+                                                            <td role="gridcell">19</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
+                                                    <a href="#" title="Go to the first page" class="k-link k-pager-nav k-pager-first k-state-disabled"
+                                                        data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-seek-w">Go to the first page</span>
+                                                    </a>
+                                                    <a href="#" title="Go to the previous page" class="k-link k-pager-nav  k-state-disabled"
+                                                        data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-arrow-w">Go to the previous page</span>
+                                                    </a>
+                                                    <ul class="k-pager-numbers k-reset">
+                                                        <li>
+                                                            <span class="k-state-selected">1</span>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="#" title="Go to the next page" class="k-link k-pager-nav  k-state-disabled"
+                                                        data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-arrow-e">Go to the next page</span>
+                                                    </a>
+                                                    <a href="#" title="Go to the last page" class="k-link k-pager-nav k-pager-last k-state-disabled"
+                                                        data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-seek-e">Go to the last page</span>
+                                                    </a>
+                                                    <a href="#" class="k-pager-refresh k-link" title="Refresh">
+                                                        <span class="k-icon k-i-refresh">Refresh</span>
+                                                    </a>
+                                                    <span class="k-pager-info k-label">1 - 1 of 1 items</span>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    // $('#popular-search-terms-box').on('click', 'button[data-widget="collapse"]', function () {
+                                                    //     var collapsed = !$('#popular-search-terms-box').hasClass('collapsed-box');
+                                                    //     saveUserPreferences('/admin/Preferences/SavePreference', 'HidePopularSearchTermsReport', collapsed);
+                                                    // });
+                                                    var StaticPopularSearchTermsReport = {"Data":[{"Keyword":"computer","Count":34,"Form":null,"CustomProperties":{}},{"Keyword":"camera","Count":30,"Form":null,"CustomProperties":{}},{"Keyword":"jewelry","Count":27,"Form":null,"CustomProperties":{}},{"Keyword":"shoes","Count":26,"Form":null,"CustomProperties":{}},{"Keyword":"jeans","Count":19,"Form":null,"CustomProperties":{}}],"Total":1,"ExtraData":null,"Errors":null,"Form":null,"CustomProperties":{}};
+                                                    $("#search-term-report-grid").kendoGrid({
+                                                        dataSource: {
+                                                            type: "json",
+                                                            transport: StaticPopularSearchTermsReport,
+                                                            schema: {
+                                                                data: "Data",
+                                                                total: "Total",
+                                                                errors: "Errors"
+                                                            },
+                                                            error: function (e) {
+                                                                display_kendoui_grid_error(e);
+                                                                // Cancel the changes
+                                                                this.cancelChanges();
+                                                            },
+                                                            pageSize: 5,
+                                                            serverPaging: true,
+                                                            serverFiltering: true,
+                                                            serverSorting: true
+                                                        },
+                                                        pageable: {
+                                                            refresh: true,
+                                                            messages: {
+                                                                display: "{0} - {1} of {2} items",
+                                                                empty: "No items to display",
+                                                                page: "Page",
+                                                                of: "of {0}",
+                                                                itemsPerPage: "items per page",
+                                                                first: "Go to the first page",
+                                                                previous: "Go to the previous page",
+                                                                next: "Go to the next page",
+                                                                last: "Go to the last page",
+                                                                refresh: "Refresh",
+                                                                allPages: "All",
+                                                                morePages: "More pages"
+                                                            }
+                                                        },
+                                                        editable: {
+                                                            confirmation: "Are you sure you want to delete this item?",
+                                                            mode: "inline"
+                                                        },
+                                                        scrollable: false,
+                                                        columns: [{
+                                                            field: "Keyword",
+                                                            title: "Keyword"
+                                                        }, {
+                                                            field: "Count",
+                                                            title: "Count"
+                                                        }]
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="box box-info " id="bestsellers-report-quantity-box">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                <i class="fa fa-star"></i>
+                                                Bestsellers by quantity
+                                            </h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div id="bestsellers-byquantity-grid" data-role="grid" class="k-grid k-widget">
+                                                <table role="grid">
+                                                    <colgroup>
+                                                        <col>
+                                                        <col>
+                                                        <col>
+                                                        <col style="width:100px">
+                                                    </colgroup>
+                                                    <thead class="k-grid-header" role="rowgroup">
+                                                        <tr role="row">
+                                                            <th role="columnheader" data-field="ProductName" data-title="Name" class="k-header">Name</th>
+                                                            <th role="columnheader" data-field="TotalQuantity" data-title="Total quantity" class="k-header">Total quantity</th>
+                                                            <th role="columnheader" data-field="TotalAmount" data-title="Total amount (excl tax)" class="k-header">Total amount (excl tax)</th>
+                                                            <th role="columnheader" data-field="ProductId" data-title="View" style="text-align:center" class="k-header">View</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody role="rowgroup">
+                                                        <tr data-uid="a6d4e2f6-71d1-4072-a90e-aac20b7b8d9f" role="row">
+                                                            <td role="gridcell">Apple iCam</td>
+                                                            <td role="gridcell">2</td>
+                                                            <td role="gridcell">$2,600.00</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Product/Edit/17">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="974ab3ff-23d4-46b6-aa85-2c370c976f30" role="row">
+                                                            <td role="gridcell">Levi's 511 Jeans</td>
+                                                            <td role="gridcell">1</td>
+                                                            <td role="gridcell">$43.50</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Product/Edit/30">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-uid="4a4a8ffd-9242-41c6-842d-4bcbfc07339e" role="row">
+                                                            <td role="gridcell">Night Visions</td>
+                                                            <td role="gridcell">1</td>
+                                                            <td role="gridcell">$2.80</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Product/Edit/34">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="a511f46e-68c0-4646-8155-eca75733cbf8" role="row">
+                                                            <td role="gridcell">If You Wait (donation)</td>
+                                                            <td role="gridcell">1</td>
+                                                            <td role="gridcell">$3.00</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Product/Edit/35">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-uid="fa05bad4-8618-4257-837f-5155c8336ac5" role="row">
+                                                            <td role="gridcell">Science &amp; Faith</td>
+                                                            <td role="gridcell">1</td>
+                                                            <td role="gridcell">$3.00</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Product/Edit/36">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
+                                                    <a href="#" title="Go to the first page" class="k-link k-pager-nav k-pager-first k-state-disabled" data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-seek-w">Go to the first page</span>
+                                                    </a>
+                                                    <a href="#" title="Go to the previous page" class="k-link k-pager-nav  k-state-disabled" data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-arrow-w">Go to the previous page</span>
+                                                    </a>
+                                                    <ul class="k-pager-numbers k-reset">
+                                                        <li>
+                                                            <span class="k-state-selected">1</span>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="#" title="Go to the next page" class="k-link k-pager-nav  k-state-disabled" data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-arrow-e">Go to the next page</span>
+                                                    </a>
+                                                    <a href="#" title="Go to the last page" class="k-link k-pager-nav k-pager-last k-state-disabled" data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-seek-e">Go to the last page</span>
+                                                    </a>
+                                                    <a href="#" class="k-pager-refresh k-link" title="Refresh">
+                                                        <span class="k-icon k-i-refresh">Refresh</span>
+                                                    </a>
+                                                    <span class="k-pager-info k-label">1 - 1 of 1 items</span>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    // $('#bestsellers-report-quantity-box').on('click', 'button[data-widget="collapse"]', function () {
+                                                    //     var collapsed = !$('#bestsellers-report-quantity-box').hasClass('collapsed-box');
+                                                    //     saveUserPreferences('/admin/Preferences/SavePreference', 'HideBestsellersBriefReportByQuantityPanel', collapsed);
+                                                    // });
+                                                    var StaticBestsellersBriefReportByQuantityList = { "Data": [{ "ProductId": 17, "ProductName": "Apple iCam", "TotalAmount": "$2,600.00", "TotalQuantity": 2.0, "Form": null, "CustomProperties": {} }, { "ProductId": 30, "ProductName": "Levi's 511 Jeans", "TotalAmount": "$43.50", "TotalQuantity": 1.0, "Form": null, "CustomProperties": {} }, { "ProductId": 34, "ProductName": "Night Visions", "TotalAmount": "$2.80", "TotalQuantity": 1.0, "Form": null, "CustomProperties": {} }, { "ProductId": 35, "ProductName": "If You Wait (donation)", "TotalAmount": "$3.00", "TotalQuantity": 1.0, "Form": null, "CustomProperties": {} }, { "ProductId": 36, "ProductName": "Science & Faith", "TotalAmount": "$3.00", "TotalQuantity": 1.0, "Form": null, "CustomProperties": {} }], "Total": 1, "ExtraData": null, "Errors": null, "Form": null, "CustomProperties": {} };
+                                                    $("#bestsellers-byquantity-grid").kendoGrid({
+                                                        dataSource: {
+                                                            type: "json",
+                                                            transport: StaticBestsellersBriefReportByQuantityList,
+                                                            schema: {
+                                                                data: "Data",
+                                                                total: "Total",
+                                                                errors: "Errors"
+                                                            },
+                                                            error: function (e) {
+                                                                display_kendoui_grid_error(e);
+                                                                // Cancel the changes
+                                                                this.cancelChanges();
+                                                            },
+                                                            pageSize: 5,
+                                                            serverPaging: true,
+                                                            serverFiltering: true,
+                                                            serverSorting: true
+                                                        },
+                                                        pageable: {
+                                                            refresh: true,
+                                                            messages: {
+                                                                display: "{0} - {1} of {2} items",
+                                                                empty: "No items to display",
+                                                                page: "Page",
+                                                                of: "of {0}",
+                                                                itemsPerPage: "items per page",
+                                                                first: "Go to the first page",
+                                                                previous: "Go to the previous page",
+                                                                next: "Go to the next page",
+                                                                last: "Go to the last page",
+                                                                refresh: "Refresh",
+                                                                allPages: "All",
+                                                                morePages: "More pages"
+                                                            }
+                                                        },
+                                                        editable: {
+                                                            confirmation: "Are you sure you want to delete this item?",
+                                                            mode: "inline"
+                                                        },
+                                                        scrollable: false,
+                                                        columns: [{
+                                                            field: "ProductName",
+                                                            title: "Name"
+                                                        }, {
+                                                            field: "TotalQuantity",
+                                                            title: "Total quantity"
+                                                        }, {
+                                                            field: "TotalAmount",
+                                                            title: "Total amount (excl tax)"
+                                                        }, {
+                                                            field: "ProductId",
+                                                            title: "View",
+                                                            width: 100,
+                                                            headerAttributes: { style: "text-align:center" },
+                                                            attributes: { style: "text-align:center" },
+                                                            template: '<a class="btn btn-xs btn-default" href="/Admin/Product/Edit/#=ProductId#"><i class="fa fa-eye"></i>View</a>'
+                                                        }]
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="box box-info " id="bestsellers-report-amount-box">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                <i class="fa fa-star-o"></i>
+                                                Bestsellers by amount
+                                            </h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div id="bestsellers-byamount-grid" data-role="grid" class="k-grid k-widget">
+                                                <table role="grid">
+                                                    <colgroup>
+                                                        <col>
+                                                        <col>
+                                                        <col>
+                                                        <col style="width:100px">
+                                                    </colgroup>
+                                                    <thead class="k-grid-header" role="rowgroup">
+                                                        <tr role="row">
+                                                            <th role="columnheader" data-field="ProductName" data-title="Name" class="k-header">Name</th>
+                                                            <th role="columnheader" data-field="TotalQuantity" data-title="Total quantity" class="k-header">Total quantity</th>
+                                                            <th role="columnheader" data-field="TotalAmount" data-title="Total amount (excl tax)" class="k-header">Total amount (excl tax)</th>
+                                                            <th role="columnheader" data-field="ProductId" data-title="View" style="text-align:center" class="k-header">View</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody role="rowgroup">
+                                                        <tr data-uid="8de844a4-cb34-4e88-8cb5-8217111f772d" role="row">
+                                                            <td role="gridcell">Apple iCam</td>
+                                                            <td role="gridcell">2</td>
+                                                            <td role="gridcell">$2,600.00</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Product/Edit/17">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="70a7066f-d320-431d-9b36-f61033df4c6b" role="row">
+                                                            <td role="gridcell">Vintage Style Engagement Ring</td>
+                                                            <td role="gridcell">1</td>
+                                                            <td role="gridcell">$2,100.00</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Product/Edit/42">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-uid="166e4318-9686-4980-be79-4333c020c1f4" role="row">
+                                                            <td role="gridcell">Leica T Mirrorless Digital Camera</td>
+                                                            <td role="gridcell">1</td>
+                                                            <td role="gridcell">$530.00</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Product/Edit/16">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="k-alt" data-uid="dfdd5655-1ddf-413f-b982-349095ee9691" role="row">
+                                                            <td role="gridcell">Flower Girl Bracelet</td>
+                                                            <td role="gridcell">1</td>
+                                                            <td role="gridcell">$360.00</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Product/Edit/41">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-uid="97838c45-c951-4ef0-95c5-67c441e8da7c" role="row">
+                                                            <td role="gridcell">First Prize Pies</td>
+                                                            <td role="gridcell">1</td>
+                                                            <td role="gridcell">$51.00</td>
+                                                            <td style="text-align:center" role="gridcell">
+                                                                <a class="btn btn-xs btn-default" href="/Admin/Product/Edit/38">
+                                                                    <i class="fa fa-eye"></i>View</a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
+                                                    <a href="#" title="Go to the first page" class="k-link k-pager-nav k-pager-first k-state-disabled" data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-seek-w">Go to the first page</span>
+                                                    </a>
+                                                    <a href="#" title="Go to the previous page" class="k-link k-pager-nav  k-state-disabled" data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-arrow-w">Go to the previous page</span>
+                                                    </a>
+                                                    <ul class="k-pager-numbers k-reset">
+                                                        <li>
+                                                            <span class="k-state-selected">1</span>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="#" title="Go to the next page" class="k-link k-pager-nav  k-state-disabled" data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-arrow-e">Go to the next page</span>
+                                                    </a>
+                                                    <a href="#" title="Go to the last page" class="k-link k-pager-nav k-pager-last k-state-disabled" data-page="1" tabindex="-1">
+                                                        <span class="k-icon k-i-seek-e">Go to the last page</span>
+                                                    </a>
+                                                    <a href="#" class="k-pager-refresh k-link" title="Refresh">
+                                                        <span class="k-icon k-i-refresh">Refresh</span>
+                                                    </a>
+                                                    <span class="k-pager-info k-label">1 - 1 of 1 items</span>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    // $('#bestsellers-report-amount-box').on('click', 'button[data-widget="collapse"]', function () {
+                                                    //     var collapsed = !$('#bestsellers-report-amount-box').hasClass('collapsed-box');
+                                                    //     saveUserPreferences('/admin/Preferences/SavePreference', 'HideBestsellersBriefReportByAmountPanel', collapsed);
+                                                    // });
+                                                    var StaticBestsellersBriefReportByAmountList = { "Data": [{ "ProductId": 17, "ProductName": "Apple iCam", "TotalAmount": "$2,600.00", "TotalQuantity": 2.0, "Form": null, "CustomProperties": {} }, { "ProductId": 42, "ProductName": "Vintage Style Engagement Ring", "TotalAmount": "$2,100.00", "TotalQuantity": 1.0, "Form": null, "CustomProperties": {} }, { "ProductId": 16, "ProductName": "Leica T Mirrorless Digital Camera", "TotalAmount": "$530.00", "TotalQuantity": 1.0, "Form": null, "CustomProperties": {} }, { "ProductId": 41, "ProductName": "Flower Girl Bracelet", "TotalAmount": "$360.00", "TotalQuantity": 1.0, "Form": null, "CustomProperties": {} }, { "ProductId": 38, "ProductName": "First Prize Pies", "TotalAmount": "$51.00", "TotalQuantity": 1.0, "Form": null, "CustomProperties": {} }], "Total": 1, "ExtraData": null, "Errors": null, "Form": null, "CustomProperties": {} };
+                                                    $("#bestsellers-byamount-grid").kendoGrid({
+                                                        dataSource: {
+                                                            type: "json",
+                                                            transport: StaticBestsellersBriefReportByAmountList,
+                                                            schema: {
+                                                                data: "Data",
+                                                                total: "Total",
+                                                                errors: "Errors"
+                                                            },
+                                                            error: function (e) {
+                                                                display_kendoui_grid_error(e);
+                                                                // Cancel the changes
+                                                                this.cancelChanges();
+                                                            },
+                                                            pageSize: 5,
+                                                            serverPaging: true,
+                                                            serverFiltering: true,
+                                                            serverSorting: true
+                                                        },
+                                                        pageable: {
+                                                            refresh: true,
+                                                            messages: {
+                                                                display: "{0} - {1} of {2} items",
+                                                                empty: "No items to display",
+                                                                page: "Page",
+                                                                of: "of {0}",
+                                                                itemsPerPage: "items per page",
+                                                                first: "Go to the first page",
+                                                                previous: "Go to the previous page",
+                                                                next: "Go to the next page",
+                                                                last: "Go to the last page",
+                                                                refresh: "Refresh",
+                                                                allPages: "All",
+                                                                morePages: "More pages"
+                                                            }
+                                                        },
+                                                        editable: {
+                                                            confirmation: "Are you sure you want to delete this item?",
+                                                            mode: "inline"
+                                                        },
+                                                        scrollable: false,
+                                                        columns: [{
+                                                            field: "ProductName",
+                                                            title: "Name"
+                                                        }, {
+                                                            field: "TotalQuantity",
+                                                            title: "Total quantity"
+                                                        }, {
+                                                            field: "TotalAmount",
+                                                            title: "Total amount (excl tax)"
+                                                        }, {
+                                                            field: "ProductId",
+                                                            title: "View",
+                                                            width: 100,
+                                                            headerAttributes: { style: "text-align:center" },
+                                                            attributes: { style: "text-align:center" },
+                                                            template: '<a class="btn btn-xs btn-default" href="/Admin/Product/Edit/#=ProductId#"><i class="fa fa-eye"></i>View</a>'
+                                                        }]
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CONTENT WRAPPER -->
+        <div class="main-footer clearfix">
+            <div class="pull-left">
+                Powered by
+                <a href="https://www.nopcommerce.com/?utm_source=admin-panel&amp;utm_medium=footer&amp;utm_campaign=admin-panel" target="_blank">nopCommerce</a>
+            </div>
+            <div class="pull-right hidden-xs">
+                <b>nopCommerce version 4.10</b>
+            </div>
+            <div class="text-center">
+                Tuesday, August 07, 2018 10:07 PM
+            </div>
+        </div>
+    </div>
+
+    <a id="backTop" class="btn btn-back-top bg-teal" style="display: none;"></a>
+    <script>
+        $(document).ready(function () {
+            //enable "back top" arrow
+            $('#backTop').backTop();
+
+            //enable tooltips
+            $('[data-toggle="tooltip"]').tooltip()
+
+            //save sidebar preferences
+            // $('a.sidebar-toggle').on('click', function () {
+            //     var collapsed = !$('body').hasClass('sidebar-collapse');
+            //     saveUserPreferences('/admin/Preferences/SavePreference', 'HideSidebar', collapsed);
+            // });
+
+            //bug-fix for unexpected auto-closing of grid's page size DropDownList in Chrome (Kendo grid bug)
+            var ddl = $(".k-grid-pager [data-role='dropdownlist']").data("kendoDropDownList");
+            if (ddl) {
+                ddl.bind("close", pager_close);
+
+                function pager_close(e) {
+                    e.sender.refresh()
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

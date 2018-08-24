@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" class="html-login-page">
+
+<head>
+    <title>Your store. Login</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="generator" content="nopCommerce" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="lib/jquery-ui/jquery-ui-1.12.1.custom/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="Themes/DefaultClean/Content/css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+    <link rel="shortcut icon" href="http://admin-demo.nopcommerce.com/favicon.ico" />
+
+</head>
+
+<body>
+    <div class="ajax-loading-block-window" style="display: none">
+    </div>
+    <div id="dialog-notifications-success" title="Notification" style="display:none;">
+    </div>
+    <div id="dialog-notifications-error" title="Error" style="display:none;">
+    </div>
+    <div id="dialog-notifications-warning" title="Warning" style="display:none;">
+    </div>
+    <div id="bar-notification" class="bar-notification">
+        <span class="close" title="Close">&nbsp;</span>
+    </div>
+    <!--[if lte IE 8]>
+    <div style="clear:both;height:59px;text-align:center;position:relative;">
+        <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx" target="_blank">
+            <img src="Themes/DefaultClean/Content/images/ie_warning.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+        </a>
+    </div>
+<![endif]-->
+    <div class="master-wrapper-page">
+        <div class="master-wrapper-content">
+            <div class="master-column-wrapper">
+                <div class="center-1">
+                    <div class="page login-page">
+                        <div class="page-title">
+                            <h1>Welcome, Please Sign In!</h1>
+                        </div>
+                        <div class="page-body">
+                            <div class="customer-blocks">
+                                <div class="new-wrapper register-block">
+                                    <div class="title">
+                                        <strong>New Customer</strong>
+                                    </div>
+                                    <div class="text">
+                                        By creating an account on our website, you will be able to shop faster, be up to date on an orders status, and keep track
+                                        of the orders you have previously made.
+                                    </div>
+                                    <div class="buttons">
+                                        <input type="button" class="button-1 register-button" onclick="location.href='http://admin-demo.nopcommerce.com/register?returnurl=%2Fadmin%2F'"
+                                            value="Register" />
+                                    </div>
+                                </div>
+                                <div class="returning-wrapper fieldset">
+                                    <form method="post" action="/login?returnurl=%2Fadmin%2F">
+                                        <div class="title">
+                                            <strong>Returning Customer</strong>
+                                        </div>
+                                        <div class="form-fields">
+                                            <div class="inputs">
+                                                <label for="Email">Email:</label>
+                                                <input class="email" autofocus="autofocus" type="email" data-val="true" data-val-email="Wrong email" data-val-required="Please enter your email"
+                                                    id="Email" name="Email" value="" />
+                                                <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="inputs">
+                                                <label for="Password">Password:</label>
+                                                <input class="password" type="password" id="Password" name="Password" data-val="true" data-val-required="Please enter your password" />
+                                                <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <div class="inputs reversed">
+                                                <input type="checkbox" data-val="true" data-val-required="The Remember me? field is required." id="RememberMe" name="RememberMe"
+                                                    value="true" />
+                                                <label for="RememberMe">Remember me?</label>
+                                            </div>
+                                        </div>
+                                        <div class="buttons">
+                                            <input class="button-1 login-button" type="submit" value="Log in" />
+                                        </div>
+                                        <input name="RememberMe" type="hidden" value="false" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="lib/jquery-validate/jquery.validate-v1.17.0/jquery.validate.min.js"></script>
+    <script src="lib/jquery-validate/jquery.validate.unobtrusive-v3.2.10/jquery.validate.unobtrusive.min.js"></script>
+    <script src="lib/jquery-ui/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="lib/jquery-migrate/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/public.common.js"></script>
+    <script src="js/public.ajaxcart.js"></script>
+</body>
+
+</html>
